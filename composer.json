@@ -1,0 +1,22 @@
+{
+    "name": "raphyabak/laravel-subscriptions",
+    "description": "Complete subscription management system for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Raphyabak\\Subscription\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Raphyabak\\Subscription\\Providers\\SubscriptionServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9.0|^10.0"
+    }
+}
