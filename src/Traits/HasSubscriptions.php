@@ -22,14 +22,14 @@ trait HasSubscriptions
         return !is_null($this->activeSubscription());
     }
 
-    public function subscribeTo(Plan $plan)
+    public function subscribeTo(Plan $plan, $duration = null)
     {
         $subscription = $this->subscriptions()->create([
             'plan_id' => $plan->id,
             'starts_at' => now(),
-            'ends_at' => now()->addDays($plan->duration),
+            'ends_at' => now()->addDays($duration ?? $plan->duration),
             'is_active' => true,
-            'duration' => $plan->duration,
+            'duration' => $duration ?? $plan->duration,
         ]);
 
         event(new SubscriptionCreated($subscription));

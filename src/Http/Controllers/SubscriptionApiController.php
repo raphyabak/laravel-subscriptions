@@ -16,12 +16,13 @@ class SubscriptionApiController extends Controller
 
     public function subscribe(Request $request, Plan $plan)
     {
-        $request->validate([
+        $validated = $request->validate([
             'payment_token' => 'required|string',
+            'duration' => 'required|string',
         ]);
 
         // Process payment here
-        $subscription = $request->user()->subscribeTo($plan);
+        $subscription = $request->user()->subscribeTo($plan, $validated['duration']);
 
         return new SubscriptionResource($subscription);
     }
