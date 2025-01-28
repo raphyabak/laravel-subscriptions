@@ -13,8 +13,8 @@ class CheckFeature
 
         if (!$subscription || !$subscription->plan->hasFeature($feature)) {
             return $request->expectsJson()
-            ? response()->json(['error' => "Feature $feature not available"], 403)
-            : redirect()->route(config('subscription.redirects.unauthorized'));
+            ? response()->json(['error' => "Feature $feature not available on your plan"], 403)
+            : redirect()->back()->withErrors(['error' => "Feature $feature not available on your plan"]);
         }
 
         return $next($request);

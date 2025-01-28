@@ -10,23 +10,13 @@ return [
         'plans' => 'plans',
         'subscriptions' => 'subscriptions',
     ],
-    'route_prefix' => 'subscriptions',
     'redirects' => [
         'unauthenticated' => 'login',
-        'inactive' => 'subscriptions.index',
-        'unauthorized' => 'subscriptions.upgrade',
     ],
-    'api' => [
-        'enabled' => true,
-        'middleware' => ['api', 'auth:api'],
-        'throttle' => [
-            'enabled' => true,
-            'default' => 60,
-            'plans' => [
-                'basic' => 100,
-                'pro' => 1000,
-                'enterprise' => null,
-            ],
-        ],
+
+    'messages' => [
+        'unauthenticated' => 'You need to log in to access this resource.',
+        'subscription_required' => 'An active subscription is required to access this resource.',
+        'plan_required' => 'You need to be on the :plan plan to access this resource.',
     ],
 ];

@@ -9,6 +9,7 @@ class SubscriptionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/subscription.php', 'subscription');
+        $this->app->register(SubscriptionGateServiceProvider::class);
     }
 
     public function boot()
@@ -22,10 +23,8 @@ class SubscriptionServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('feature', \Raphyabak\Subscription\Http\Middleware\CheckFeature::class);
         $this->app['router']->aliasMiddleware('throttle_by_subscription', \Raphyabak\Subscription\Http\Middleware\ThrottleBySubscription::class);
 
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
-
-        if (config('subscription.api.enabled')) {
-            $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
-        }
+        $this->commands([
+            \Raphyabak\Subscription\Console\Commands\CheckSubscriptionStatus::class,
+        ]);
     }
 }

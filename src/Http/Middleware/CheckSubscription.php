@@ -28,15 +28,18 @@ class CheckSubscription
 
     private function unauthorizedResponse(Request $request)
     {
+        $message = trans('subscription::messages.unauthenticated');
         return $request->expectsJson()
-        ? response()->json(['error' => 'Unauthenticated'], 401)
+        ? response()->json(['error' => $message], 401)
         : redirect()->route(config('subscription.redirects.unauthenticated'));
     }
 
     private function forbiddenResponse(Request $request, string $messageKey, array $replace = [])
     {
+        $message = trans("subscription::messages.$messageKey", $replace);
+
         return $request->expectsJson()
-        ? response()->json(['error' => trans("subscription::messages.$messageKey", $replace)], 403)
-        : redirect()->route(config('subscription.redirects.unauthorized'));
+        ? response()->json(['error' => $message], 403)
+        : redirect()->back()->withErrors(['error' => $message]);
     }
 }

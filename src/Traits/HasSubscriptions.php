@@ -44,4 +44,10 @@ trait HasSubscriptions
             event(new \Raphyabak\Subscription\Events\SubscriptionCancelled($subscription));
         }
     }
+
+    public function hasFeature($feature)
+    {
+        $subscription = $this->activeSubscription();
+        return $subscription && $subscription->plan->hasFeature($feature);
+    }
 }

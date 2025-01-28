@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create(config('subscription.table_names.subscriptions'), function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('plan_id')->constrained('plans')->onDelete('cascade');
+            $table->foreignId('plan_id')->constrained(config('subscription.table_names.plans'))->onDelete('cascade');
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->boolean('is_active')->default(true);
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists(config('subscription.table_names.subscriptions'));
     }
 };
