@@ -40,6 +40,6 @@ class CheckSubscription
 
         return $request->expectsJson()
         ? response()->json(['error' => $message], 403)
-        : redirect()->back()->withErrors(['error' => $message]);
+        : abort(403, $message);
     }
 }
