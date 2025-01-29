@@ -3,7 +3,6 @@
     "description": "Complete subscription management system for Laravel",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
