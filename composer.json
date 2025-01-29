@@ -3,6 +3,8 @@
     "description": "Complete subscription management system for Laravel",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Raphyabak\\Subscription\\": "src/"
